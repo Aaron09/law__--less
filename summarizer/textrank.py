@@ -1,5 +1,23 @@
 import numpy as np
 import scipy.linalg as spl
+from sentence import Sentence
+"""
+s_array: A list of sentences where each sentence is a list of terms
+scores : sentence scores
+n      : Number of sentences to return
+return : A list of sentence objects appearing in chronological order with the top n sentences highlighted True
+"""
+def get_chronological_sentences(s_array, scores, n):
+    sentence_objs = []
+    best_sentences = get_n_best_sentences(s_array, scores, n)
+    for sentence in s_array:
+        if sentence in best_sentences:
+            sent_obj = Sentence(sentence, True)
+        else:
+            sent_obj = Sentence(sentence, False)
+        sentence_objs.append(sent_obj)
+    return sentence_objs
+
 
 '''
 len_adj_matrix: The size of the adj matrix
